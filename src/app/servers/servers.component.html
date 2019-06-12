@@ -1,8 +1,21 @@
-<button class="btn btn-primary" [disabled]="!allowNewServer">Add Server</button>
-<app-server></app-server>
-<p>
-  Server {{ serverId }} status is {{ serverStatus }}
-</p>
+<label>Server Name</label>
+<!--one way-->
+<!--input type="text" class="form-control" (input)="onInputChange($event)"-->
+<!--two way-->
+<input type="text" class="form-control" [(ngModel)]="serverName">
 
+
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+<app-server></app-server>
+
+
+<p *ngIf="serverCreated; else noServer"> {{ serverStatus }}</p>
+<ng-template #noServer>
+  <p>
+    No Server Online
+  </p>
+</ng-template>
+
+<!--p>{{serverName}}</p-->
 <!--same using string interpolation-->
 <p [innerText]="allowNewServer"></p>
